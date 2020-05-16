@@ -1,0 +1,228 @@
+<html>
+
+<head>
+  <meta charset="UTF-8">
+
+  <title>Star rating  pure CSS</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+</style>
+</head>
+
+<body> 
+  
+  <div id="saveRate" class="rate">
+<h6>Enter Your Rate </h6>
+    <input type="radio" id="star5" name="rate" value="5" onclick="save_rate()"/>
+    <label for="star5" title="text">5 stars</label>
+    <input type="radio" id="star4" name="rate" value="4" onclick="save_rate()"/>
+    <label for="star4" title="text">4 stars</label>
+    <input type="radio" id="star3" name="rate" value="3" onclick="save_rate()"/>
+    <label for="star3" title="text">3 stars</label>
+    <input type="radio" id="star2" name="rate" value="2" onclick="save_rate()"/>
+    <label for="star2" title="text">2 stars</label>
+    <input type="radio" id="star1" name="rate" value="1" onclick="save_rate()"/>
+    <label for="star1" title="text">1 star</label>
+
+  </div>
+   
+    
+
+<script>
+
+
+
+function save_rate() {
+            const star5 = document.getElementById("star5")
+            const star4 = document.getElementById("star4")
+            const star3 = document.getElementById("star3")
+            const star2 = document.getElementById("star2")
+            const star1 = document.getElementById("star1")
+             var selectedValue = ""
+            if (star1.checked){
+                  selectedValue = star1.value
+                   }
+            else if (star2.checked){ 
+                   selectedValue = star2.value
+                 }
+             else if (star3.checked){ 
+                   selectedValue = star3.value
+                 }
+              else if (star4.checked){ 
+                   selectedValue = star4.value
+                 }
+               else if(star5.checked){ 
+                   selectedValue = star5.value
+                 }   
+            console.log(selectedValue);
+      
+          
+}
+
+</script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="stylesheet" type="text/css" href="style.css">
+  <title>Star rating  pure CSS</title>
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+.rate:not(:checked) > input {
+    position:absolute;
+    top:-9999px;
+}
+.rate:not(:checked) > label {
+    float:right;
+    width:1em;
+    overflow:hidden;
+    white-space:nowrap;
+    cursor:pointer;
+    font-size:30px;
+    color:#ccc;
+}
+.rate:not(:checked) > label:before {
+    content: '★ ';
+}
+.rate > input:checked ~ label {
+    color: #ffc700;    
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+    color: #deb217;  
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+    color: #c59b08;
+}
+
+/* Modified from: https://github.com/mukulkant/Star-rating-using-pure-css */
+</style>
+</head>
+
+<body>
+  <form>
+  <div id="saveRate" class="rate">
+    <input type="radio" id="star5" name="rate" value="5" />
+    <label for="star5" title="text">5 stars</label>
+    <input type="radio" id="star4" name="rate" value="4" />
+    <label for="star4" title="text">4 stars</label>
+    <input type="radio" id="star3" name="rate" value="3" />
+    <label for="star3" title="text">3 stars</label>
+    <input type="radio" id="star2" name="rate" value="2" />
+    <label for="star2" title="text">2 stars</label>
+    <input type="radio" id="star1" name="rate" value="1" />
+    <label for="star1" title="text">1 star</label>
+
+  </div>
+    <input type="button" id="btn" value="Show Selected Value">
+    
+</form>
+<script>
+const star5 = document.getElementById("star5")
+const star4 = document.getElementById("star4")
+const star3 = document.getElementById("star3")
+const star2 = document.getElementById("star2")
+const star1 = document.getElementById("star1")
+
+const btn = document.querySelector('#btn');
+  btn.onclick = function () {
+   const rbs = document.querySelectorAll('input[name="rate"]');
+            let selectedValue;
+            for (const rb of rbs) {
+                if (rb.checked) {
+                    selectedValue = rb.value;
+                    break;
+                }
+            }
+            console.log(selectedValue);
+      
+           };
+    axios
+    .post(BASE_URL + `/rates`, { r: selectedValue, b: book_id, u:"5eb9f701f223ca27acaec0ec" })
+    .then(function (response) {
+      console.log("response: " + JSON.stringify(response));
+      let review_detail = response.data;
+      console.log("review_detail:", review_detail);
+      //review.value = ""
+    })
+.catch(function (error) {
+      if (error.response) {
+        if (error.response.status == 404) {
+          console.log("error:", 404);
+          window.location.replace("/errors/404");
+        }
+        else {
+          console.log("error:", error);
+        }
+      }
+    })
+}
+
+</script>
+</body>
+
+</html>
