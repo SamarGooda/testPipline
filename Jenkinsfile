@@ -3,7 +3,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo "samar"
+                echo "iti"
+            }
+        }
+        stage('two') {
+            steps {
+                echo "nti"
             }
         }
     }
