@@ -16,6 +16,12 @@ pipeline {
                 }
             
                  }
+         stage(' whoami') {
+            steps {
+                sh "whoami"
+                  }
+            }
+       
         stage('Cloning our Git') {
            steps {
               git 'https://github.com/SamarGooda/testPipline.git'
