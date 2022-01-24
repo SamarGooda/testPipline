@@ -1,11 +1,11 @@
 pipeline {
     agent any
     stages {
-        stage('install') {
-            steps {
-                sh "yum install docker"
-                  }
-            }
+        stage('Cloning our Git') {
+           steps {
+              git 'https://github.com/YourGithubAccount/YourGithubRepository.git'
+                }
+                 }
         stage('build') {
             steps {
                 sh "docker build ."
