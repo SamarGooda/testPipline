@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sudo docker build –t myimage:0.1. 
+                sudo docker build –t myimage:0.1 . 
             }
         }
         stage('two') {
