@@ -3,12 +3,12 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                echo "iti"
+                sudo docker build –t myimage:0.1. 
             }
         }
         stage('two') {
             steps {
-                echo "nti"
+                echo "success"
             }
         }
     }
