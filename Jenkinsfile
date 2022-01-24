@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('build') {
             steps {
-                sudo docker build . 
+                docker build . 
             }
         }
         stage('two') {
